@@ -28,3 +28,5 @@ group :development do
 
 end
 
+
+gem "rspec-rails", "~> 6.1", :groups => [:development, :test]
