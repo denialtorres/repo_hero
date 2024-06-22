@@ -90,6 +90,8 @@ GEM
     erubi (1.13.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    graphql (2.3.5)
+      base64
     i18n (1.14.5)
       concurrent-ruby (~> 1.0)
     io-console (0.7.2)
@@ -205,6 +207,7 @@ PLATFORMS
 
 DEPENDENCIES
   debug
+  graphql (~> 2.3)
   puma (>= 5.0)
   rails (~> 7.1.0)
   rspec-rails (~> 6.1)
