@@ -10,4 +10,4 @@ query {
 }
 QUERY
 result = RepoHeroSchema.execute(query)
-puts JSON.pretty_generate(result
+puts JSON.pretty_generate(result)
