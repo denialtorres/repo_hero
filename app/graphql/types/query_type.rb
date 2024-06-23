@@ -26,5 +26,15 @@ module Types
     def repos
       Repo.all
     end
+
+    # ---
+
+    field :repo, RepoType, null: false do
+      argument :id, ID, required: true
+    end
+
+    def repo(id:)
+      Repo.find(id)
+    end
   end
 end
