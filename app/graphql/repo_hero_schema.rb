@@ -6,6 +6,7 @@ class RepoHeroSchema < GraphQL::Schema
 
   max_depth 15
   max_complexity 100
+  max_page_size 20
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
