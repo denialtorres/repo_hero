@@ -14,18 +14,20 @@ RSpec.describe "Graphql, repo query, with activity" do
     query = <<~QUERY
       query($id: ID!){
         repo(id: $id){
-          name
-          activities {
-            nodes {
-              __typename
-              event {
-                ... on Review {
-                  rating
-                  comment
-                }
+          ...on Repo {
+            name
+            activities {
+              nodes {
+                __typename
+                event {
+                  ... on Review {
+                    rating
+                    comment
+                  }
 
-                ... on Like {
-                  createdAt
+                  ... on Like {
+                    createdAt
+                  }
                 }
               }
             }
