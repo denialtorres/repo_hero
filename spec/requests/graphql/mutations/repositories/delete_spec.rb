@@ -1,13 +1,12 @@
 require "rails_helper"
 
-RSpec.describe "GraphQL, deleteReview mutation" do
+RSpec.describe "GraphQL, deleteRepo mutation" do
   let!(:repo) { Repo.create!(name: "Repo Hero", url: "google.com") }
-  let!(:review) { repo.reviews.create!(comment: "Spammy spam spam spam", rating: 1) }
 
-  it "deletes an existing review" do
+  it "deletes an existing repo" do
     query = <<~QUERY
       mutation($id: ID!){
-        deleteReview(input: { reviewId: $id }){
+        deleteRepo(input: { repoId: $id }){
           id
         }
       }
@@ -16,14 +15,14 @@ RSpec.describe "GraphQL, deleteReview mutation" do
     post "/graphql", params: {
       query: query,
       variables: {
-        id: review.id
+        id: repo.id
       }
     }
 
     expect(response.parsed_body).not_to have_errors
     expect(response.parsed_body["data"]).to eq(
-      "deleteReview" => {
-        "id" => review.id.to_s
+      "deleteRepo" => {
+        "id" => repo.id.to_s
       }
     )
   end
