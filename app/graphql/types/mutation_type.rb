@@ -8,5 +8,8 @@ module Types
 
     # for categories
     field :add_category, mutation: Mutations::Categories::Add
+
+    # for repositories
+    field :add_repo, mutation: Mutations::Repositories::Add
   end
 end

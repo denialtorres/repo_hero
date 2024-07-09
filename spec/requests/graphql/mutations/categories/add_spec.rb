@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "Grahpqhl, addCategory mutation" do
+RSpec.describe "Graphql, addCategory mutation" do
   let!(:repo) { Repo.create!(name: "Repo Hero", url: "google.com") }
 
   it "adds a new category" do
