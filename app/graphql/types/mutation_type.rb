@@ -13,5 +13,6 @@ module Types
     field :add_repo, mutation: Mutations::Repositories::Add
     field :update_repo, mutation: Mutations::Repositories::Update
     field :delete_repo, mutation: Mutations::Repositories::Delete
+    field :add_repository_category, mutation: Mutations::Repositories::AddCategory
   end
 end
