@@ -6,7 +6,7 @@ RSpec.describe "GraphQL, updateReview mutation" do
 
   it "edits an existing review" do
     query = <<~QUERY
-      mutation ($id: ID!, $rating: ReviewRating!, $comment: String!){
+      mutation($id: ID!, $rating: ReviewRating!, $comment: String!){
         updateReview(input: { reviewId: $id, rating: $rating, comment: $comment}){
           rating
           comment

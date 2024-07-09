@@ -11,5 +11,6 @@ module Types
 
     # for repositories
     field :add_repo, mutation: Mutations::Repositories::Add
+    field :update_repo, mutation: Mutations::Repositories::Update
   end
 end
