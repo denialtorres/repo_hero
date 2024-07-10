@@ -2,4 +2,4 @@
 
 from the GraphQL for Rails Developers book
 
-- next chapter -> 7. Union Types for Validations
+- next chapter -> 8. Authentication
