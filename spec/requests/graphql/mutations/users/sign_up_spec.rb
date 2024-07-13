@@ -16,9 +16,20 @@ RSpec.describe "GraphQL, signUp mutation", type: :request do
           name: $name,
         }
        ){
-        email
-        token
-       }
+          ...on AuthenticatedUser {
+            email
+            token
+          }
+          ...on ValidationError {
+            errors {
+              fullMessages
+              attributeErrors {
+                attribute
+                errors
+              }
+            }
+          }
+        }
       }
    QUERY
   end
@@ -42,5 +53,32 @@ RSpec.describe "GraphQL, signUp mutation", type: :request do
      )
 
      expect(response.parsed_body["data"]["signup"]["token"]).to be_present
+  end
+
+  it "cannot sign up with a missing email" do
+    post "/graphql", params: {
+      query: query,
+      variables: {
+        name: "Test User",
+        email: "",
+        password: "SecurePassword1",
+        password_confirmation: "SecurePassword1",
+      }
+    }
+
+
+    expect(response.parsed_body).not_to have_errors
+    signup = response.parsed_body["data"]["signup"]
+    expect(signup).to eq(
+      "errors" => {
+        "fullMessages" => ["Email can't be blank"],
+        "attributeErrors" => [
+          {
+            "attribute" => "email",
+            "errors" => ["can't be blank"],
+          }
+        ]
+      }
+    )
   end
 end

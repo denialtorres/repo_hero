@@ -1,10 +1,13 @@
 module Types
-  class SignupResult < BaseObject
-    field :email, String, null: true
-    field :token, String, null: true
+  class SignupResult < BaseUnion
+    possible_types AuthenticatedUserType, ValidationErrorType
 
-    def token
-      "abc123"
+    def self.resolve_type(object, _context)
+      if object.success?
+        [AuthenticatedUserType, object.success]
+      else
+        [ValidationErrorType, object.failure]
+      end
     end
   end
 end
