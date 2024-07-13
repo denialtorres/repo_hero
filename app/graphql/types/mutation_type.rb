@@ -17,5 +17,6 @@ module Types
 
     # for signup
     field :signup, mutation: Mutations::Users::SignUp
+    field :login, mutation: Mutations::Users::Login
   end
 end
