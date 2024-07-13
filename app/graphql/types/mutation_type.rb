@@ -14,5 +14,8 @@ module Types
     field :update_repo, mutation: Mutations::Repositories::Update
     field :delete_repo, mutation: Mutations::Repositories::Delete
     field :add_repository_category, mutation: Mutations::Repositories::AddCategory
+
+    # for signup
+    field :signup, mutation: Mutations::Users::SignUp
   end
 end
