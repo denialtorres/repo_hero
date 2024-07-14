@@ -2,6 +2,15 @@ require "rails_helper"
 
 RSpec.describe "GraphQL, addReview mutation" do
   let!(:repo) { Repo.create!(name: "Repo Hero", url: "https://github.com/repohero/repohero") }
+
+  let!(:user) do
+      User.create!(
+        email: "test@example.com",
+        password: "SecurePassword1",
+        name: "Test User",
+      )
+  end
+
   let(:query) do
     <<~QUERY
       mutation($id: ID!, $rating: ReviewRating!, $comment: String!){
@@ -27,14 +36,15 @@ RSpec.describe "GraphQL, addReview mutation" do
   end
 
   it "Adds a new review" do
-    post "/graphql", params: {
+    graphql_request(
       query: query,
       variables: {
         id: repo.id,
         rating: "FIVE_STARS",
-        comment: "Nice repo"
-      }
-    }
+        comment: "What a repo"
+      },
+      user: user,
+    )
 
     expect(response.parsed_body).not_to have_errors
     expect(response.parsed_body["data"]).to eq(
@@ -43,17 +53,20 @@ RSpec.describe "GraphQL, addReview mutation" do
         "rating" => "FIVE_STARS",
       }
     )
+    review = Review.last
+    expect(review.user).to eq(user)
   end
 
   it "cannot add a review without a comment" do
-    post "/graphql", params: {
+    graphql_request(
       query: query,
       variables: {
         id: repo.id,
         rating: "FIVE_STARS",
         comment: ""
-      }
-    }
+      },
+      user: user,
+    )
 
     expect(response.parsed_body).not_to have_errors
     expect(response.parsed_body["data"]).to eq(

@@ -18,6 +18,8 @@ module Mutations
           comment: comment
         )
 
+        review.user = context[:current_user]
+
         if review.save
           Success(review)
         else
