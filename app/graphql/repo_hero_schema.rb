@@ -5,7 +5,7 @@ class RepoHeroSchema < GraphQL::Schema
   query(Types::QueryType)
 
   max_depth 15
-  max_complexity 100
+  max_complexity 500
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
